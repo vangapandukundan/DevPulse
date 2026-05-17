@@ -70,9 +70,20 @@ Navigate to `http://localhost:5173` to see the dashboard.
 
 ---
 
-## 🎤 Hackathon Demo Flow
+## 🎤  Demo Flow
 
-1. **The Messy Reality:** Open the Overview Dashboard. Point out the raw commit heatmaps and activity logs. 
-2. **The AI Analysis:** Click **"Run Agent"**. Watch the dashboard transform instantly as Gemini detects hours of "Invisible Work" and calculates the Burnout Risk based on late-night commits.
-3. **The Autonomous Action:** Show the "Agent Logs" where DevPulse autonomously decides to block off the developer's Google Calendar tomorrow at 10 AM to protect their focus time.
-4. **The Mic Drop:** Go to the **Review Generator**. Click "Generate Review" and watch Gemini write a perfect, detailed performance review based on 6 months of historical data in 2 seconds.
+DevPulse — Developer Intelligence Agent Your personal AI that tracks your code, detects burnout, finds your invisible work, and writes your performance review.
+
+The Problem: You spend 3 hours today fixing a critical bug that your junior teammate caused. Then you spend 2 hours carefully reviewing code for another team. Then you attend 3 hours of meetings. At the end of the day, you have written zero new lines of code yourself.
+
+When Performance Review time comes, your manager looks at your GitHub and says: "You didn't write any code this month. You are underperforming."
+
+This is called "Invisible Work," and it causes developers to get angry, underpaid, and burned out. Furthermore, when developers are pushed too hard, they code late at night—a direct precursor to burnout that goes completely unnoticed by standard metrics.
+
+The Solution:
+
+An Autonomous Agent DevPulse is a personal AI agent that sits in the background and watches everything you do. It connects your raw developer activity to the Google Gemini AI and MCP (Model Context Protocol) to provide real, actionable interventions. DevPulse detects unrecorded effort and logs it so you get credit. Analyzes your commits over time to generate a personal growth score based on new languages and patterns you touch. DevPulse pulls months of MongoDB data and writes your entire self-review with specific examples, metrics, and impact statements. Goes from 4 hours of work to 30 seconds. By analyzing 30 days of commit timestamps, DevPulse learns your personal peak productivity windows. It then acts autonomously, connecting to the Google Calendar API via MCP to automatically block your calendar for "Deep Work" to protect your time and mental health.
+
+Technologies Used: DevPulse goes beyond a standard dashboard by implementing a true Agent Loop powered by Google Cloud.
+
+Frontend: React, HTML5, CSS3 (Google Material Design UI) Backend: FastAPI (Python) AI / Machine Learning: Google Vertex AI (Gemini 1.5) Database: MongoDB Agent Framework: MCP (Model Context Protocol) for Calendar Tool integration
