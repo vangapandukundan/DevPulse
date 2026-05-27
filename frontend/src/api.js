@@ -1,14 +1,28 @@
 import axios from 'axios'
 
+// Use VITE_API_URL for cloud deployment, fallback to /api for local dev proxy
+const BASE_URL = import.meta.env.VITE_API_URL || '/api'
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: BASE_URL,
   timeout: 30000,
 })
 
+// ─── Developers (Dynamic Registry) ──────────────────────────────────────
+
+export const getDevelopers = () =>
+  api.get('/developers').then(r => r.data)
+
+export const registerDeveloper = (data) =>
+  api.post('/developers', data).then(r => r.data)
+
+export const removeDeveloper = (developerId) =>
+  api.delete(`/developers/${developerId}`).then(r => r.data)
+
 // ─── Agent ──────────────────────────────────────────────────────────────
 
-export const runAgent = (developerId, days = 30) =>
-  api.post(`/agent/run/${developerId}`, null, { params: { days } }).then(r => r.data)
+export const runAgent = (username, days = 30) =>
+  api.post(`/agent/run/${username}`, null, { params: { days } }).then(r => r.data)
 
 export const runAllAgents = () =>
   api.post('/agent/run-all').then(r => r.data)
@@ -16,11 +30,14 @@ export const runAllAgents = () =>
 export const getAgentRuns = (developerId) =>
   api.get('/agent/runs', { params: developerId ? { developer_id: developerId } : {} }).then(r => r.data)
 
+export const getDeveloperMe = () =>
+  api.get('/developer/me').then(r => r.data)
+
+export const getDeveloperByUsername = (username) =>
+  api.get(`/developer/${username}`).then(r => r.data)
+
 export const getMCPTools = () =>
   api.get('/agent/tools').then(r => r.data)
-
-export const getDevelopers = () =>
-  api.get('/agent/developers').then(r => r.data)
 
 // ─── Activity ────────────────────────────────────────────────────────────
 

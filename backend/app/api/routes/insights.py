@@ -1,4 +1,4 @@
-﻿"""Insights routes."""
+"""Insights routes."""
 from fastapi import APIRouter
 from app.services.db_service import db_service
 
@@ -23,8 +23,8 @@ async def get_latest_insight(developer_id: str):
 
 @router.get("/summary")
 async def get_summary():
-    """Aggregate summary across all developers."""
-    from app.services.mock_data import get_all_developers
+    """Aggregate summary across all registered developers."""
+    from app.services.developer_service import get_all_developers
     devs = get_all_developers()
     summaries = []
     for dev in devs:
@@ -32,12 +32,16 @@ async def get_summary():
         if insight:
             insight.pop("_id", None)
             summaries.append({
-                "developer_id": dev["id"],
-                "developer_name": dev["name"],
-                "productivity_score": insight.get("productivity_score", 0),
-                "burnout_score": insight.get("burnout_score", 0),
-                "burnout_level": insight.get("burnout_level", "low"),
-                "invisible_work_count": len(insight.get("invisible_work", [])),
-                "generated_at": insight.get("generated_at"),
+                "developer_id":          dev["id"],
+                "developer_name":        dev["name"],
+                "developer_role":        dev.get("role", ""),
+                "developer_team":        dev.get("team", ""),
+                "avatar_color":          dev.get("avatar_color", "#6366f1"),
+                "productivity_score":    insight.get("productivity_score", 0),
+                "burnout_score":         insight.get("burnout_score", 0),
+                "burnout_level":         insight.get("burnout_level", "low"),
+                "invisible_work_count":  len(insight.get("invisible_work", [])),
+                "generated_at":          insight.get("generated_at"),
             })
     return {"summary": summaries}
+
