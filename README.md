@@ -80,4 +80,3 @@ npm install
 # Start Vite hot-reload server
 npm run dev
 ```
-Navigate to `http://localhost:5173` to view the local instance.
