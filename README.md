@@ -1,73 +1,83 @@
-1. What is DevPulse?
-DevPulse is a full-stack, AI-driven developer intelligence dashboard and autonomous agent. It is designed to act as a developer advocate, tracking your real code metrics, finding "Invisible Work" (like heavy code reviews, mentoring, and issue discussions), assessing burnout risks, and taking autonomous actions to protect your health and career.
+# ⚡ DevPulse — Developer Intelligence Agent
 
-2. How it Works (Under the Hood)
-GitHub Activity Tracking: The backend tracks raw commit histories, comment timestamps, and pull requests.
-AI Agent Loop: The agent runs your developer activity logs through Google Gemini. Gemini analyzes patterns to determine burnout levels, technical trajectory, and peak productivity hours.
-Autonomous Action (MCP): If Gemini detects that you work best in a specific window (e.g. 2 PM to 5 PM) or are at risk of burnout, it communicates with the Google Calendar API via the Model Context Protocol (MCP). It schedules recurring "Deep Work Blocks" that automatically decline overlapping meeting invites.
-Global Syncing: The React frontend uses a unified context, immediately synchronising state across all tabs (Overview, Insights, Actions, Reviews, and Logs).
+> **Live Demo URL**: [https://dev-pulse-sigma-taupe.vercel.app/](https://dev-pulse-sigma-taupe.vercel.app/)  
+> **Backend Service**: [https://devpulse-uis1.onrender.com/health](https://devpulse-uis1.onrender.com/health)
 
-3. Real-Life Utility (Why it's useful for daily life)
-Time Protection: It actively shields your flow state. If you code best in the afternoon, it blocks that time on your calendar and declines conflicting meetings.
-Fair Evaluations: It automatically records your "invisible contributions" (like mentoring and PR reviews) and uses Gemini to instantly draft your Self-Performance Reviews in seconds, saving you hours of stress.
-Burnout Prevention: By alerting you to sleep-disruptive coding habits, it prompts you to close your laptop and maintain a healthy work-life balance.
+DevPulse is an AI-driven developer advocacy agent and analytics dashboard. It is designed to act as a developer advocate: tracking code metrics, detecting "Invisible Work" (like heavy code reviews, mentoring, and discussions), assessing burnout risk, and taking autonomous action (like calendar blocking via Google Calendar MCP) to protect developer wellbeing.
 
-Technologies Used: DevPulse goes beyond a standard dashboard by implementing a true Agent Loop powered by Google Cloud.
+---
 
-**DevPulse** is a personal AI agent that sits in the background and watches everything you do. It connects your raw developer activity to the **Google Gemini AI** and **MCP (Model Context Protocol)** to provide real, actionable interventions.
+## 🎯 What DevPulse Does
 
-### Key Features
-- 👁️ **Invisible Work Detector:** DevPulse detects unrecorded effort (like mentoring, heavy PR reviews, and architectural planning) and logs it so you get credit.
-- 📈 **Skill Velocity Tracker:** Analyzes your commits over time to generate a personal growth score based on new languages and patterns you touch.
-- 📝 **Auto Performance Review Writer:** DevPulse pulls MongoDB data and writes your entire self-review with specific examples, metrics, and impact statements.
-- 📤 **Markdown Exporter:** Instantly download formatted reviews as `.md` files or copy them to your clipboard with a single click.
-- ⚖️ **Burnout & Flow State Optimizer:** By analyzing 30 days of commit timestamps, DevPulse learns your personal peak productivity windows. **It then acts autonomously**, connecting to the Google Calendar API via MCP to automatically block your calendar for "Deep Work" to protect your time and mental health.
+*   **👁️ Detects "Invisible Work"**: Automatically captures unrecorded developer contributions—like peer pull request reviews, issue discussions, and mentoring—ensuring hidden contributions are visible.
+*   **📈 Tracks Skill Velocity**: Evaluates commit patterns, framework usage, and documentation changes to chart real-time trajectory and skill-acquisition confidence.
+*   **🔋 Burnout & Focus Analysis**: Analyzes commit timestamps to assess workload stress. It automatically highlights anomalous late-night or weekend work patterns.
+*   **🔒 Focus-Block Autopiloting**: Uses an autonomous agent scheduler to detect if a developer's peak productivity hours fall between **2 PM and 5 PM**. It interfaces with the Google Calendar API to block recurring "Deep Work" times and automatically decline conflicting meetings.
+*   **📝 Automated Performance Appraisals**: Gathers historical developer metrics and instantly generates a highly detailed, HR-grade self-appraisal with actionable growth recommendations.
+
+---
+
+## 💻 How to View the Dashboard (Live Demo Walkthrough)
+
+To explore DevPulse's capabilities using the live link, follow these steps:
+
+1.  **Open the Live URL**: Click [https://dev-pulse-sigma-taupe.vercel.app/](https://dev-pulse-sigma-taupe.vercel.app/) to launch the dark-mode dashboard.
+2.  **View Seed Profiles**: Toggle between **Anika Sharma** (Backend lead) and **Jordan Williams** (DevOps specialist) to see their stress meters, peak times, and commit activity.
+3.  **Add a Developer Dynamically**: Click the **`+ Add`** tab in the selection bar. Input a public GitHub username (e.g., `torvalds` or your own username), select a custom theme color, and hit submit. The new developer will load real-time statistics immediately.
+4.  **Explore AI Insights**: Click **Insights** in the left menu. View the developer's custom **Skills Strength Map** (spider web radar chart) and **Skill Velocity Tracker** showing rising and stable skill trajectories.
+5.  **Check Autopiloted Actions**: Click **Actions** in the left menu. Under **Schedule Adjustment Timeline**, notice the automated `"⚡ Autopilot: Daily Deep Work Focus Block"` schedule protection added during the developer's peak productivity hours.
+6.  **Create an Appraisal**: Go to the **Review Generator** page, select your developer, choose the review period, and click **Generate AI Review**. The agent will draft a professional review summary, list achievements, identify growth areas, and assess burnout.
+7.  **Single-Click Delete**: Return to the dashboard and click the small red **`x`** next to any dynamically added developer tab to remove them instantly from the local session and database.
 
 ---
 
 ## 🏗️ Architecture & MCP Partner Integration
 
-DevPulse goes beyond a standard dashboard by implementing a true **Agent Loop** powered by Google Cloud Agent Builder and the Model Context Protocol (MCP).
+DevPulse integrates key developer platforms with the **Model Context Protocol (MCP)**:
 
-### 🤝 Partner Power: MCP Server Integration (Hackathon Requirement)
-To give our Gemini agent its superpowers, DevPulse integrates with participating partners using the **Model Context Protocol (MCP)**:
-1. **GitHub (Partner MCP):** The agent fetches real-time repository data, PR reviews, and issue comments to detect invisible work.
-2. **MongoDB (Partner MCP / Storage):** Stores historical insights and performance review metrics.
-3. **Google Workspace (Calendar MCP):** Our custom MCP Tool allows Gemini to autonomously block off "Deep Work" recovery time on the developer's Google Calendar.
+```
+GitHub APIs ──> Agent Loop ──> Gemini 2.0 Flash ──> MongoDB Atlas ──> Google Calendar (MCP Calendar Block)
+```
 
-**The Autonomous Flow:**
-`GitHub APIs → Agent Loop → Gemini Analysis → MongoDB Storage → MCP Execution (Auto-Calendar Blocking)`
-
-### Tech Stack
-- **Frontend:** React, HTML5, CSS3 (Data Analytics Dark Mode - Grafana/Vercel style)
-- **Backend:** FastAPI (Python)
-- **AI / Machine Learning:** Google Gemini 2.0 Flash AI
-- **Database:** MongoDB / In-memory fallback
-- **Agent Framework:** Model Context Protocol (MCP) tool integration
+### Partner Integrations:
+1.  **GitHub (Partner MCP)**: Queries commit history, repository data, and PR reviews to extract raw metrics.
+2.  **MongoDB Atlas (Partner MCP / Cloud Storage)**: Persists developer profiles, historical analysis runs, and generated reviews.
+3.  **Google Workspace (Calendar MCP)**: Leverages a custom MCP Calendar Tool to autonomously manage out-of-office blocks and protect developer deep-work hours.
 
 ---
 
 ## 🚀 How to Run Locally
 
-### 1. Backend Setup
+If you wish to clone the repository and run it on your localhost, follow these setup instructions:
+
+### 1. Backend Setup (FastAPI)
 ```bash
-cd C:\Users\kunda\OneDrive\Desktop\DevPulse\backend
+# Navigate to the backend directory
+cd backend
+
+# Activate virtual environment
+# On Windows:
 ..\venv\Scripts\activate
+# On Unix/macOS:
+source ../venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Start local server
 uvicorn main:app --reload --port 8000
 ```
+Make sure your `backend/.env` file is populated with your `GEMINI_API_KEY`, `MONGODB_URL`, and `DEMO_MODE=true`.
 
-### 2. Frontend Setup
+### 2. Frontend Setup (Vite / React)
 ```bash
-cd C:\Users\kunda\OneDrive\Desktop\DevPulse\frontend
+# Navigate to the frontend directory
+cd ../frontend
+
+# Install dependencies
+npm install
+
+# Start Vite hot-reload server
 npm run dev
 ```
-Navigate to `http://localhost:5173` to see the dashboard.
-
----
-
-## 🎤 Hackathon Demo Flow
-
-1. **The Messy Reality:** Open the Overview Dashboard. Point out the raw commit heatmaps and activity logs. 
-2. **The AI Analysis:** Click **"Run Agent"**. Watch the dashboard transform instantly as Gemini detects hours of "Invisible Work" and calculates the Burnout Risk based on late-night commits.
-3. **The Autonomous Action:** Show the "Agent Logs" where DevPulse autonomously decides to block off the developer's Google Calendar tomorrow at 10 AM to protect their focus time.
-4. **The Mic Drop:** Go to the **Review Generator**. Click "Generate Review" and watch Gemini write a perfect, detailed performance review based on 6 months of historical data in 2 seconds.
+Navigate to `http://localhost:5173` to view the local instance.
